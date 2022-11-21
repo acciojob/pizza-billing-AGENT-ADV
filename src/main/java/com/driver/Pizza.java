@@ -30,7 +30,7 @@ public class Pizza
             this.price += 400;
             base = 400;
         }
-        return base;
+        return this.price;
     }
 
     public void addExtraCheese()
@@ -53,7 +53,7 @@ public class Pizza
 
     public String getBill()
     {
-        bill += "Base Price Of The Pizza: " + getPrice() + "\n";
+        bill += "Base Price Of The Pizza: " + base + "\n";
 
         if(cheese > 0) bill += "Extra Cheese Added: " + cheese+ "\n";
 
