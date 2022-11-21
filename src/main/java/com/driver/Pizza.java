@@ -5,64 +5,73 @@ import java.sql.SQLOutput;
 public class Pizza
 {
     private int price; //total
-    private int base;
     private int cheese;
     private int toppings;
     private int paper;
-
-    private Boolean isVeg;
+    private boolean isBillCreated;
+    private boolean isVeg;
+    private boolean isTakenAway ;
     private String bill;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
         this.bill ="";
+        if(isVeg) this.price = 300;
+        else this.price = 400;
     }
 
     public int getPrice()
     {
-        if(isVeg)
-        {
-            this.price += 300;
-            base = 300;
-        }
-        else
-        {
-            this.price += 400;
-            base = 400;
-        }
         return this.price;
     }
 
     public void addExtraCheese()
     {
-        this.cheese += 80;
-        this.price += 80;
+        if(cheese == 0)
+        {
+            this.cheese += 80;
+            this.price += 80;
+        }
     }
 
     public void addExtraToppings()
     {
-        this.toppings += isVeg ? 70 : 120;
-        this.price += isVeg ? 70 : 120;
+        if(toppings == 0)
+        {
+            this.toppings += isVeg ? 70 : 120;
+            this.price += isVeg ? 70 : 120;
+        }
     }
 
     public void addTakeaway()
     {
-        this.paper += 20;
-        this.price += 20;
+        if(!isTakenAway)
+        {
+            this.paper += 20;
+            this.price += 20;
+            isTakenAway = true;
+        }
     }
 
     public String getBill()
     {
-        bill += "Base Price Of The Pizza: " + base + "\n";
+        if(!isBillCreated)
+        {
+            isBillCreated = true;
+            int base;
+            if (isVeg) base = 300;
+            else base = 400;
 
-        if(cheese > 0) bill += "Extra Cheese Added: " + cheese+ "\n";
+            bill += "Base Price Of The Pizza: " + base + "\n";
 
-        if(toppings > 0 ) bill+= "Extra Toppings Added: " + toppings + "\n";
+            if (cheese > 0) bill += "Extra Cheese Added: " + cheese + "\n";
 
-        if(paper > 0) bill += "Paperbag Added: " + paper +"\n";
+            if (toppings > 0) bill += "Extra Toppings Added: " + toppings + "\n";
 
-        bill += "Total Price: " + price + "\n";
+            if (paper > 0) bill += "Paperbag Added: " + paper + "\n";
 
+            bill += "Total Price: " + price + "\n";
+        }
         return this.bill;
     }
 }
