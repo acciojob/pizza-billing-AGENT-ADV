@@ -1,34 +1,68 @@
 package com.driver;
 
-public class Pizza {
+import java.sql.SQLOutput;
 
-    private int price;
+public class Pizza
+{
+    private int price; //total
+    private int base;
+    private int cheese;
+    private int toppings;
+    private int paper;
+
     private Boolean isVeg;
     private String bill;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
-        // your code goes here
+        this.bill ="";
     }
 
-    public int getPrice(){
-        return this.price;
+    public int getPrice()
+    {
+        if(isVeg)
+        {
+            this.price += 300;
+            base = 300;
+        }
+        else
+        {
+            this.price += 400;
+            base = 400;
+        }
+        return base;
     }
 
-    public void addExtraCheese(){
-        // your code goes here
+    public void addExtraCheese()
+    {
+        this.cheese += 80;
+        this.price += 80;
     }
 
-    public void addExtraToppings(){
-        // your code goes here
+    public void addExtraToppings()
+    {
+        this.toppings += isVeg ? 70 : 120;
+        this.price += isVeg ? 70 : 120;
     }
 
-    public void addTakeaway(){
-        // your code goes here
+    public void addTakeaway()
+    {
+        this.paper += 20;
+        this.price += 20;
     }
 
-    public String getBill(){
-        // your code goes here
+    public String getBill()
+    {
+        bill += "Base Price Of The Pizza: " + getPrice() + "\n";
+
+        if(cheese > 0) bill += "Extra Cheese Added: " + cheese+ "\n";
+
+        if(toppings > 0 ) bill+= "Extra Toppings Added: " + toppings + "\n";
+
+        if(paper > 0) bill += "Paperbag Added: " + paper +"\n";
+
+        bill += "Total Price: " + price + "\n";
+
         return this.bill;
     }
 }
